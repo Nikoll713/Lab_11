@@ -10,6 +10,12 @@ class UserCollectionSeeder extends Seeder
 {
     public function run()
     {
+        User::factory(1)
+        ->has(Post::factory()->count(3))
+        ->state([
+            "email" => "nikoll@gmail.com"])
+        ->create();
+
         User::factory(10)
             ->has(Post::factory()->count(3))
             ->create();

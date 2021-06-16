@@ -177,6 +177,7 @@ return [
 
         //MongoDB compability
         Jenssegers\Mongodb\MongodbServiceProvider::class,
+        Jenssegers\Mongodb\Auth\PasswordResetServiceProvider::class,
     ],
 
     /*
