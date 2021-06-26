@@ -29,4 +29,6 @@ Route::delete('/users/{user}',[UserController::class,'destroy'])->name('user.del
 Route::get('/users',[UserController::class,'index']);
 Route::get('/today', [PostController::class, 'today'])->name('today');
 
+Route::get('/notificaciones',[CommentController::class,'notificaciones']);
+
 Auth::routes();

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Notifications\PostNotification;
+use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
 {
@@ -26,6 +29,16 @@ class CommentController extends Controller
         $post = Post::find($request->get('post_id'));
         $post->comments()->save($comment);
 
+        $user = User::find($post->user->id);
+        $user->notify(new PostNotification($post,$comment));
+
         return redirect()->route('post', ['id' => $request->get('post_id')]);
+    }
+
+    public function notificaciones(Request $request)
+    {
+        $user=$request->user();
+        $notificaciones = $user->unreadNotifications;
+        return view('/notificaciones',compact('notificaciones'));
     }
 }
